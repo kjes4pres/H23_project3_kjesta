@@ -26,8 +26,36 @@ def random_walk_1D(N=50):
 
 
 plt.plot(random_walk_1D())
-plt.xlabel("Steps")
-plt.ylabel("x")
+plt.xlabel("Nr. of steps")
+plt.ylabel("Displacement")
 plt.title("Random walk in 1D")
+plt.grid()
+plt.show()
+
+
+def many_random_walks_1D(M=1000, N=500):
+    """
+    Simulation of many random walkers in 1D-
+
+    Input:
+    M : number of walkers
+
+    N : number of steps each walker takes
+
+    Output:
+    x: numpy array, storing the positions of each walker.
+    """
+    x = np.zeros((N + 1, M))
+    x[0, :] = 0
+    steps = rng.choice(([-1, 0, 1]), size=(N, M))
+    x[1:, :] = np.cumsum(steps, axis=0)
+
+    return x
+
+
+plt.plot(many_random_walks_1D(), linewidth=0.5)
+plt.xlabel("Nr. of steps")
+plt.ylabel("Displacement")
+plt.title(f"1000 random walkers in 1D")
 plt.grid()
 plt.show()
