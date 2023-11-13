@@ -38,7 +38,6 @@ ax.set_ylabel("Y")
 ax.set_title("Random Walk in 2D")
 ax.grid()
 ax.axis("equal")
-
 # plt.savefig("random_walk_2D.png")
 # plt.show()
 
@@ -79,6 +78,51 @@ ax.set_ylabel("Y")
 ax.set_title("Random Walk in 2D")
 ax.grid()
 ax.axis("equal")
+# plt.savefig("many_random_2D.png")
+# plt.show()
 
-plt.savefig("many_random_2D.png")
-plt.show()
+
+R = many_random_walks_2D(M=1000, N=500)
+X = R[500, 0, :]
+Y = R[500, 1, :]
+
+
+fig, ax = plt.subplots()
+scatter = ax.scatter(X, Y, s=5)
+ax.set_xlabel("X")
+ax.set_ylabel("Y")
+ax.set_title("Ending positions of 1000 random walkers in 2D")
+ax.grid()
+ax.axis("equal")
+# plt.savefig("ending_positions_2D.png")
+# plt.show()
+
+ten = [R[:, 0, :10], R[:, 1, :10]]
+hundred = [R[:, 0, :100], R[:, 1, :100]]
+thousand = [R[:, 0, :1000], R[:, 1, :1000]]
+
+time_steps = np.arange(501)
+analytical_RMS = np.sqrt(np.arange(501) * (2 / 3))
+
+fig, ax = plt.subplots()
+fig.suptitle("RMS of random walkers as function of timestep")
+ax.plot(
+    time_steps, np.sqrt(np.mean(ten[0] ** 2 + ten[1] ** 2, axis=1)), label="10 walkers"
+)
+ax.plot(
+    time_steps,
+    np.sqrt(np.mean(hundred[0] ** 2 + hundred[1] ** 2, axis=1)),
+    label="100 walkers",
+)
+ax.plot(
+    time_steps,
+    np.sqrt(np.mean(thousand[0] ** 2 + thousand[1] ** 2, axis=1)),
+    label="1000 walkers",
+)
+ax.plot(analytical_RMS, "--", label="analytical")
+ax.set_xlabel("Nr. of steps")
+ax.set_ylabel("RMS")
+ax.legend()
+ax.grid()
+# plt.savefig("statistical_2D.png")
+# plt.show()
