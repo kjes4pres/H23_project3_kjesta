@@ -22,6 +22,6 @@ $$
 $$
 
 ### Answers to task 1d)
-- blablabla 
+- The plot "statistical_1D.png" shows that the law of large numbers holds. The calculated values from the random walks gets closer to the analytical solution as numbers of walkers increases. With M = 1000, the calculated value does not deviate too much from the analytical value, and seems to develop in the same nature.
 
 ### Comments
