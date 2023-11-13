@@ -38,15 +38,15 @@ $$
 while the RMS is given by
 
 $$
-\sqrt{\langle \lvert \vec r_n \rvert^2 \rangle} = \sqrt{\langle x_n ^2 \rangle, \langle y_n ^2 \rangle} = \sqrt{(\sum_{i=1}^{n} \langle \Delta x_i ^2\rangle, \sum_{i=1}^{n} \langle \Delta y_i ^2 \rangle)} 
+\sqrt{\langle \lvert \vec r_n \rvert^2 \rangle} = \sqrt{\langle x_n ^2 \rangle + \langle y_n ^2 \rangle} = \sqrt{(\sum_{i=1}^{n} \langle \Delta x_i ^2\rangle + \sum_{i=1}^{n} \langle \Delta y_i ^2 \rangle)} 
 $$
 
 $$
-= \sqrt{(\sum_{i=1}^n(\frac{1}{3} (-1)^2 + \frac{1}{3} (0)^2 + \frac{1}{3} (1)^2),  \sum_{i=1}^n(\frac{1}{3} (-1)^2 + \frac{1}{3} (0)^2 + \frac{1}{3} (1)^2))}
+= \sqrt{(\sum_{i=1}^n(\frac{1}{3} (-1)^2 + \frac{1}{3} (0)^2 + \frac{1}{3} (1)^2) + \sum_{i=1}^n(\frac{1}{3} (-1)^2 + \frac{1}{3} (0)^2 + \frac{1}{3} (1)^2))}
 $$
 
 $$
-= \sqrt{(\frac{2n}{3}, \frac{2n}{3})}
+= \sqrt{(\frac{2n}{3} + \frac{2n}{3})} = \sqrt{\frac{4n}{3}}.
 $$
 
 
