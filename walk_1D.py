@@ -6,12 +6,12 @@ seed = 1910
 rng = np.random.default_rng(seed)
 
 
-def random_walk_1D(N=50):
+def random_walk_1D(N=50) -> np.ndarray:
     """
     A random walker in 1D
 
     Input:
-    N : number of steps for the walker
+    N : number of steps for the walker (int)
 
     Output:
     x: numpy array, storing the positions of the walker.
@@ -33,14 +33,14 @@ plt.grid()
 plt.show()
 
 
-def many_random_walks_1D(M=1000, N=500):
+def many_random_walks_1D(M=1000, N=500) -> np.ndarray:
     """
     Simulation of many random walkers in 1D-
 
     Input:
-    M : number of walkers
+    M : number of walkers (int)
 
-    N : number of steps each walker takes
+    N : number of steps each walker takes (int)
 
     Output:
     x: numpy array, storing the positions of each walker.
@@ -53,7 +53,7 @@ def many_random_walks_1D(M=1000, N=500):
     return x
 
 
-plt.plot(many_random_walks_1D(), linewidth=0.5)
+plt.plot(many_random_walks_1D(), alpha=0.5, linewidth=0.5)
 plt.xlabel("Nr. of steps")
 plt.ylabel("Displacement")
 plt.title(f"1000 random walkers in 1D")
