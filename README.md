@@ -18,7 +18,10 @@ $$
 $$
 while the RMS is given by
 $$
-     \sqrt{\langle x_n^2 \rangle} = \sqrt{(\sum_{i=1}^{n}\langle \Delta x_i )^2\rangle } = \sqrt{\sum_{i=1}^n \langle\Delta x_i^2\rangle + 2 \sum_{i<j}\langle \Delta x_i  \Delta x_j \rangle} = \sqrt{(\frac{1}{3}(-1)^2+\frac{1}{3}(0)^2 + \frac{1}{3}(1)^2) + 0} = \sqrt{\frac{2}{3}}.
+     \sqrt{\langle x_n^2 \rangle} = \sqrt{(\sum_{i=1}^{n}\langle \Delta x_i )^2\rangle } = \sqrt{\sum_{i=1}^n \langle\Delta x_i^2\rangle + 2 \sum_{i<j}\langle \Delta x_i  \Delta x_j \rangle} = \sqrt{\sum _{i=1}^{n}(\frac{1}{3}(-1)^2+\frac{1}{3}(0)^2 + \frac{1}{3}(1)^2) + 0} = \sqrt{\frac{2n}{3}}.
 $$
+
+### Answers to task 1d)
+- blablabla 
 
 ### Comments
