@@ -49,5 +49,8 @@ $$
 = \sqrt{\frac{2n}{3}} .
 $$
 
+### Answer to task 2d)
+The plot in figure "ending_positions_2D.png" shows that the ending positions of 1000 random walkers are concentrated around the expected position (0,0). The ending positions are located around (0,0) as a sphere, with decreasing concentration with increasing radii. 
+
 
 ### Comments
