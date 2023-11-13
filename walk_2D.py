@@ -102,27 +102,71 @@ hundred = [R[:, 0, :100], R[:, 1, :100]]
 thousand = [R[:, 0, :1000], R[:, 1, :1000]]
 
 time_steps = np.arange(501)
-analytical_RMS = np.sqrt(np.arange(501) * (2 / 3))
+analytical_mean = np.zeros((501, 2))
+analytical_RMS = np.sqrt(time_steps * (2 / 3))
 
-fig, ax = plt.subplots()
-fig.suptitle("RMS of random walkers as function of timestep")
-ax.plot(
+fig, ax = plt.subplots(3, 1, figsize=(8, 8))
+fig.suptitle("Statistical properties of walkers in 2D")
+
+
+ax[0].set_title("Mean displacement on x-axis")
+ax[0].plot(time_steps, np.mean(ten[0], axis=1), label="10 walkers")
+ax[0].plot(
+    time_steps,
+    np.mean(hundred[0], axis=1),
+    label="100 walkers",
+)
+ax[0].plot(
+    time_steps,
+    np.mean(thousand[0], axis=1),
+    label="1000 walkers",
+)
+ax[0].plot(time_steps, analytical_mean[:, 0], "--", label="analytical")
+ax[0].plot(time_steps, analytical_mean[:, 1], "--", label="analytical")
+ax[0].set_xlabel("Nr. of steps")
+ax[0].set_ylabel("Mean displacement")
+ax[0].legend()
+ax[0].grid()
+
+ax[1].set_title("Mean displacement on y-axis")
+ax[1].plot(time_steps, np.mean(ten[1], axis=1), label="10 walkers")
+ax[1].plot(
+    time_steps,
+    np.mean(hundred[1], axis=1),
+    label="100 walkers",
+)
+ax[1].plot(
+    time_steps,
+    np.mean(thousand[1], axis=1),
+    label="1000 walkers",
+)
+ax[1].plot(time_steps, analytical_mean[:, 0], "--", label="analytical")
+ax[1].plot(time_steps, analytical_mean[:, 1], "--", label="analytical")
+ax[1].set_xlabel("Nr. of steps")
+ax[1].set_ylabel("Mean displacement")
+ax[1].legend()
+ax[1].grid()
+
+ax[2].set_title("RMS")
+ax[2].plot(
     time_steps, np.sqrt(np.mean(ten[0] ** 2 + ten[1] ** 2, axis=1)), label="10 walkers"
 )
-ax.plot(
+ax[2].plot(
     time_steps,
     np.sqrt(np.mean(hundred[0] ** 2 + hundred[1] ** 2, axis=1)),
     label="100 walkers",
 )
-ax.plot(
+ax[2].plot(
     time_steps,
     np.sqrt(np.mean(thousand[0] ** 2 + thousand[1] ** 2, axis=1)),
     label="1000 walkers",
 )
-ax.plot(analytical_RMS, "--", label="analytical")
-ax.set_xlabel("Nr. of steps")
-ax.set_ylabel("RMS")
-ax.legend()
-ax.grid()
-# plt.savefig("statistical_2D.png")
-# plt.show()
+ax[2].plot(analytical_RMS, "--", label="analytical")
+ax[2].set_xlabel("Nr. of steps")
+ax[2].set_ylabel("RMS")
+ax[2].legend()
+ax[2].grid()
+
+plt.subplots_adjust(hspace=0.5)
+plt.savefig("statistical_2D.png")
+plt.show()
