@@ -1,4 +1,4 @@
-import labyrinths
+import labyrinths as lb
 import numpy as np
 
 seed = 1910
@@ -28,6 +28,9 @@ class MazeWalker:
         return self._maze
 
     def initialize_walkers(self, r0: tuple[int, int]) -> None:
+        if self._maze[(r0[0], r0[1])] == False:
+            raise lb.InvalidSquareError("Starting position is inside a wall!")
+
         self._positions = np.zeros((self._M, 2), dtype=int)
         self._positions[:, 0] = r0[0]
         self._positions[:, 1] = r0[1]
