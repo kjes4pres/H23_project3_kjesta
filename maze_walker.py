@@ -42,3 +42,9 @@ class MazeWalker:
     @property
     def y(self) -> np.ndarray:
         return self._positions[:, 1]
+
+    def move(self) -> None:
+        steps = self._rng.integers(-1, 2, size=(self._M, 2))
+        for i in range(self._M):
+            self._positions[i, 0] = self._positions[i, 0] + steps[i, 0]
+            self._positions[i, 1] = self._positions[i, 1] + steps[i, 1]
