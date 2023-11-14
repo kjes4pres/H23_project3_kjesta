@@ -48,3 +48,10 @@ class MazeWalker:
         for i in range(self._M):
             self._positions[i, 0] = self._positions[i, 0] + steps[i, 0]
             self._positions[i, 1] = self._positions[i, 1] + steps[i, 1]
+
+
+if __name__ == "__main__":
+    maze = lb.circular()
+    walkers = MazeWalker(M=500, maze=maze, rng=rng, r0=(100, 100))
+    animation = lb.Animation(walkers)
+    animation.animate(N=200)
