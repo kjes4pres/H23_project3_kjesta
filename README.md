@@ -57,5 +57,21 @@ The plot in figure "ending_positions_2D.png" shows that the ending positions of 
 56316 walkers reached an end point. Ending positions of 100 000 walkers after 2000 steps resembles a normal distribution on the x-axis, as the CLT says. Most of the walkers ended on a x-position around 54. 
 ![_](3h.png)
 
+### Answer to task 4a)
+Given the figure below, the time complexity of taking a single step goes as O(M) in big Oh notation. The runtime increases linearly with increasing amount of walkers. If the M walkers were to walk the whole maze, taking N steps: $$ N*M = O(NM)$$.
+![_](4a.png)
+
+### Answers to task 4b)
+- "Tottime" is the total time spent inside a method/function, excluding any calls to other methods within the method. "Cumtime" on the other hand is the cumulative time spent within a method, including the time spent for calling other methods from the given method. So if you're i one function doing some stuff, needing to call another function and running that , the "tottime" does not include the time calling another function as time spent in the function. If a method/function does not call any other methods/functions, "tottime" and "cumtime" will be the same. 
+- The top three methods that spend the most time is 
+  - def not_finished(), where it seems to use quite some time to check if the positions of the M walkers are in fact a endpoint. 
+  - def move(), has a high cumtime due to its call to not_finished, but regardless also has the second highest tottime. 
+  - def _remove_illegal(), has no function calls, and is the third most time consuming method. 
+
+  I think that when listing the top three most time consuming methods one should look at the tottime, because this is the one showing whether that method is implemented in a smart way. I think my move method improved alot by vectorization, but has a large cumtime because its calling the not_finished method which clearly could be improved time-wise. 
+
+  - The cprofiler results indicates that at least the not_finished method can be improved, because it is sinking the whole program. I started off by havig that method implemented with a for-loop, and later changed to a vectorized method because I realized in 3h) that with non-vectorized and a call from inside the move function, it had to iterate all the positions, 100_000 of them, for each step. As of right now, I would need alot more time to see how I can improve it further. 
+
 
 ### Comments
+- The animation in task 3h) took 1.5 hours to complete, even after vectorizing the most important methods. 
