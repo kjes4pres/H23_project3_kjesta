@@ -167,6 +167,8 @@ if __name__ == "__main__":
     # plt.grid()
     # plt.savefig("4a.png")
     # plt.show()
+
+    # 4b
     stats = pstats.Stats("maze.cprof")
     stats.sort_stats(pstats.SortKey.TIME).print_stats(10)
     stats.sort_stats(pstats.SortKey.TIME).print_stats("maze_walker.py")
