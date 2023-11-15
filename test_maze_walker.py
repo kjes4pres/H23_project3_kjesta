@@ -10,6 +10,10 @@ example_labyrinth = labyrinths.example()
 
 
 def test_remove_illegal():
+    """
+    Testing that _remove_illegal method in MazeWalker class
+    correctly removes illegal steps. No moving across aze boundaries.
+    """
     starting_point = [4, 3]
     walker = mz.MazeWalker(M=10, maze=example_labyrinth, rng=rng, r0=starting_point)
     dr = rng.integers(-1, 2, size=(walker._M, 2))
