@@ -2,6 +2,7 @@ import labyrinths as lb
 import numpy as np
 import matplotlib.pyplot as plt
 import time
+import pstats
 
 seed = 1910
 rng = np.random.default_rng(seed)
@@ -159,10 +160,13 @@ if __name__ == "__main__":
             walkers.move()
         end_time = time.perf_counter()
         avg_elapsed_time.append((end_time - start_time) / time_steps)
-    plt.plot(M, avg_elapsed_time)
-    plt.xlabel("Number of walkers")
-    plt.ylabel("Seconds")
-    plt.title("Average time for M walkers to take 1 step")
-    plt.grid()
-    plt.savefig("4a.png")
-    plt.show()
+    # plt.plot(M, avg_elapsed_time)
+    # plt.xlabel("Number of walkers")
+    # plt.ylabel("Seconds")
+    # plt.title("Average time for M walkers to take 1 step")
+    # plt.grid()
+    # plt.savefig("4a.png")
+    # plt.show()
+    stats = pstats.Stats("maze.cprof")
+    stats.sort_stats(pstats.SortKey.TIME).print_stats(10)
+    stats.sort_stats(pstats.SortKey.TIME).print_stats("maze_walker.py")
