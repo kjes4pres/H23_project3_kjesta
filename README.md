@@ -32,7 +32,9 @@ Mean displacement at time step $n$ is given by
 $$
 \langle \vec r_n \rangle = (\langle x_n \rangle, \langle y_n \rangle) = (\sum_{i=1}^{n} \langle \Delta x_i \rangle, \sum_{i=1}^{n} \langle \Delta y_i \rangle) =
 $$
-$$ \sum_{i=1}^{n}( \frac{1}{6} (-1) + \frac{1}{6} (0) + \frac{1}{6} (1),  \frac{1}{6} (-1) + \frac{1}{6} (0) + \frac{1}{6} (1)) = (0,0)
+
+$$
+ \sum_{i=1}^{n}( \frac{1}{6} (-1) + \frac{1}{6} (0) + \frac{1}{6} (1),  \frac{1}{6} (-1) + \frac{1}{6} (0) + \frac{1}{6} (1)) = (0,0)
 $$
 
 while the RMS is given by
