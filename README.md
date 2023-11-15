@@ -53,4 +53,9 @@ $$
 The plot in figure "ending_positions_2D.png" shows that the ending positions of 1000 random walkers are concentrated around the expected position (0,0). The ending positions are located around (0,0) as a sphere, with decreasing concentration with increasing radii. 
 
 
+### Answer to task 3h)
+56316 walkers reached an end point. Ending positions of 100 000 walkers after 2000 steps resembles a normal distribution on the x-axis, as the CLT says. Most of the walkers ended on a x-position around 54. 
+![_](3h.png)
+
+
 ### Comments
