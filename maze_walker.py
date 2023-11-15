@@ -26,12 +26,14 @@ class MazeWalker:
         maze: np.ndarray,
         rng: np.random.Generator,
         r0: tuple[int, int] = np.array([1, 1]),
+        endpoints: list[tuple] = [],
     ) -> None:
         self._M = M
         self._maze = maze
         self._rng = rng
         self.r0 = r0
         self.initialize_walkers(r0)
+        self.endpoints = endpoints
 
     @property
     def M(self) -> int:
@@ -69,15 +71,16 @@ class MazeWalker:
     def move(self) -> None:
         """
         Method for moving each walker by one step.
+        Walker stays still if it has reached the end point.
         """
         steps = self._rng.integers(-1, 2, size=(self._M, 2))
         legal_steps = self._remove_illegal(steps)
-        for i in range(self._M):
-            self._positions[i, 0] = self._positions[i, 0] + legal_steps[i, 0]
-            self._positions[i, 1] = self._positions[i, 1] + legal_steps[i, 1]
+        is_it_done = self.not_finished()
+
+        self._positions[is_it_done] += legal_steps[is_it_done]
 
     def _remove_illegal(self, dr: np.ndarray) -> np.ndarray:
-        """'
+        """
         Method for removing illegal steps, and replacing by (0,0),
         making the walker stand still.
 
@@ -92,6 +95,20 @@ class MazeWalker:
                 dr[i, 0] = 0
                 dr[i, 1] = 0
         return dr
+
+    def not_finished(self) -> np.ndarray:
+        """
+        Method for checking if a walker has reached the end point in the maze.
+
+        Output:
+        is_it_done: boolean array, value True if the walker has not reached the endpoint.
+        False if the walker is at an endpoint.
+        """
+        is_it_done = np.ones(self._M, dtype=bool)
+        for i in range(self._M):
+            if tuple(self._positions[i]) in self.endpoints:
+                is_it_done[i] = False
+        return is_it_done
 
 
 if __name__ == "__main__":
