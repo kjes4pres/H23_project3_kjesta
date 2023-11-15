@@ -1,6 +1,7 @@
 import labyrinths as lb
 import numpy as np
 import matplotlib.pyplot as plt
+import time
 
 seed = 1910
 rng = np.random.default_rng(seed)
@@ -111,34 +112,57 @@ class MazeWalker:
 
 
 if __name__ == "__main__":
-    maze = lb.circular()
-    walkers = MazeWalker(M=500, maze=maze, rng=rng, r0=(100, 100))
-    animation = lb.Animation(walkers)
-    animation.animate(N=200)
+    # 3e
+    # maze = lb.circular()
+    # walkers = MazeWalker(M=500, maze=maze, rng=rng, r0=(100, 100))
+    # animation = lb.Animation(walkers)
+    # animation.animate(N=200)
 
+    # 3h
     maze = lb.layered_labyrinth(layers=2)
     line = maze.shape[1] - 2
     start_points = lb.get_legal_line(maze, y=line)
     endpoints = lb.get_legal_line(maze, y=1)
 
-    walkers = MazeWalker(
-        M=100_000, maze=maze, rng=rng, r0=start_points[1], endpoints=endpoints
-    )
-    animation = lb.Animation(walkers)
-    animation.animate(N=2000, interval=1, size=5)
+    # walkers = MazeWalker(
+    #     M=100_000, maze=maze, rng=rng, r0=start_points[1], endpoints=endpoints
+    # )
+    # animation = lb.Animation(walkers)
+    # animation.animate(N=2000, interval=1, size=5)
 
-    finished_walkers = 100_000 - np.sum(walkers.not_finished())
-    print(f"{finished_walkers} walkers reached an end point.")
+    # finished_walkers = 100_000 - np.sum(walkers.not_finished())
+    # print(f"{finished_walkers} walkers reached an end point.")
 
-    plt.hist(
-        walkers._positions[:, 0],
-        bins=maze.shape[0],
-        range=(0, maze.shape[0]),
-        edgecolor="black",
-    )
-    plt.xlabel("x position")
-    plt.ylabel("nr. walkers")
-    plt.title("Ending positions of 100 000 walkers after 2000 steps")
+    # plt.hist(
+    #     walkers._positions[:, 0],
+    #     bins=maze.shape[0],
+    #     range=(0, maze.shape[0]),
+    #     edgecolor="black",
+    # )
+    # plt.xlabel("x position")
+    # plt.ylabel("nr. walkers")
+    # plt.title("Ending positions of 100 000 walkers after 2000 steps")
+    # plt.grid()
+    # # plt.savefig("3h.png")
+    # plt.show()
+
+    # 4a
+    M = [1, 10, 100, 1000]
+    time_steps = 1000
+    avg_elapsed_time = []
+    for m in M:
+        walkers = MazeWalker(
+            M=m, maze=maze, rng=rng, r0=start_points[1], endpoints=endpoints
+        )
+        start_time = time.perf_counter()
+        for i in range(time_steps):
+            walkers.move()
+        end_time = time.perf_counter()
+        avg_elapsed_time.append((end_time - start_time) / time_steps)
+    plt.plot(M, avg_elapsed_time)
+    plt.xlabel("Number of walkers")
+    plt.ylabel("Seconds")
+    plt.title("Average time for M walkers to take 1 step")
     plt.grid()
-    # plt.savefig("3h.png")
+    plt.savefig("4a.png")
     plt.show()
