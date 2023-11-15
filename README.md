@@ -75,3 +75,4 @@ Given the figure below, the time complexity of taking a single step goes as O(M)
 
 ### Comments
 - The animation in task 3h) took 1.5 hours to complete, even after vectorizing the most important methods. 
+- This README file looks good in the preview section in VScode, but I notice that it doesnt get rendered correctly when pushing to github. Especially the mathematical formulas. 
