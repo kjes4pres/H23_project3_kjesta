@@ -1,5 +1,6 @@
 import labyrinths as lb
 import numpy as np
+import matplotlib.pyplot as plt
 
 seed = 1910
 rng = np.random.default_rng(seed)
@@ -88,12 +89,9 @@ class MazeWalker:
         dr: numpy array containing the next step for all walkers, with no illegal steps.
 
         """
-        for i in range(self._M):
-            dx = self._positions[i, 0] + dr[i, 0]
-            dy = self._positions[i, 1] + dr[i, 1]
-            if self._maze[dx, dy] == False:
-                dr[i, 0] = 0
-                dr[i, 1] = 0
+        new_positions = self._positions + dr
+        valid_indices = self._maze[new_positions[:, 0], new_positions[:, 1]]
+        dr[~valid_indices] = 0
         return dr
 
     def not_finished(self) -> np.ndarray:
@@ -105,6 +103,7 @@ class MazeWalker:
         False if the walker is at an endpoint.
         """
         is_it_done = np.ones(self._M, dtype=bool)
+
         for i in range(self._M):
             if tuple(self._positions[i]) in self.endpoints:
                 is_it_done[i] = False
@@ -116,3 +115,30 @@ if __name__ == "__main__":
     walkers = MazeWalker(M=500, maze=maze, rng=rng, r0=(100, 100))
     animation = lb.Animation(walkers)
     animation.animate(N=200)
+
+    maze = lb.layered_labyrinth(layers=2)
+    line = maze.shape[1] - 2
+    start_points = lb.get_legal_line(maze, y=line)
+    endpoints = lb.get_legal_line(maze, y=1)
+
+    walkers = MazeWalker(
+        M=100_000, maze=maze, rng=rng, r0=start_points[1], endpoints=endpoints
+    )
+    animation = lb.Animation(walkers)
+    animation.animate(N=2000, interval=1, size=5)
+
+    finished_walkers = 100_000 - np.sum(walkers.not_finished())
+    print(f"{finished_walkers} walkers reached an end point.")
+
+    plt.hist(
+        walkers._positions[:, 0],
+        bins=maze.shape[0],
+        range=(0, maze.shape[0]),
+        edgecolor="black",
+    )
+    plt.xlabel("x position")
+    plt.ylabel("nr. walkers")
+    plt.title("Ending positions of 100 000 walkers after 2000 steps")
+    plt.grid()
+    plt.savefig("3h.png")
+    plt.show()
