@@ -102,11 +102,11 @@ class MazeWalker:
         is_it_done: boolean array, value True if the walker has not reached the endpoint.
         False if the walker is at an endpoint.
         """
+        position_in_endpoint = np.array(
+            [tuple(pos) in self.endpoints for pos in self._positions], dtype=bool
+        )
         is_it_done = np.ones(self._M, dtype=bool)
-
-        for i in range(self._M):
-            if tuple(self._positions[i]) in self.endpoints:
-                is_it_done[i] = False
+        is_it_done[position_in_endpoint] = False
         return is_it_done
 
 
@@ -140,5 +140,5 @@ if __name__ == "__main__":
     plt.ylabel("nr. walkers")
     plt.title("Ending positions of 100 000 walkers after 2000 steps")
     plt.grid()
-    plt.savefig("3h.png")
+    # plt.savefig("3h.png")
     plt.show()
